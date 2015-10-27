@@ -1,0 +1,51 @@
+    #include <stdio.h>
+    int main(void)
+    {
+        FILE *in = fopen("test.txt", "r");
+        
+        if (in != NULL) {
+            char line[BUFSIZ];
+            
+            while (fgets(line, sizeof line, in) != NULL) {
+                char *start = line;
+                int field;
+                int n;
+                
+                while (sscanf(start, "%d%n", &field, &n) == 1) {
+                    printf("%d ", field);
+                    start += n;
+                }
+                    
+                puts("");
+            }
+            
+            fclose(in);
+        }
+        
+        return 0;
+    }
+//getline(buf, int, stdin)
+//fscanf("&d",d)
+//printf("")
+//man
+
+
+/*#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE* f = fopen("test.txt", "r");
+    unsigned int N = 10, delta=10, i = 0;   
+    char* buf = (char*) malloc (sizeof(char)*N);    
+    while ((buf [i] = fgetc(f)) != EOF  )  {                
+        if (++i >= N) {
+            N += delta;
+            buf = (char*) realloc (buf, sizeof(char)*N);        
+        }   
+    } 
+    fclose(f);
+    buf[i] = '\0';
+    puts (buf); 
+    free (buf);
+    return 0;
+}*/
